@@ -1,9 +1,6 @@
 import React from 'react';
-import { Link, NavLink, withRouter } from 'react-router-dom';
 
-
-const IssueRow = withRouter(({ issue, location: { search } }) => {
-  const selectLocation = { pathname: `/issues/${issue.id}`, search };
+function IssueRow({ issue }) {
     return (
       <tr>
         <td>{issue.id}</td>
@@ -13,16 +10,9 @@ const IssueRow = withRouter(({ issue, location: { search } }) => {
         <td>{issue.effort}</td>
         <td>{issue.due ? issue.due.toDateString() : ' '}</td>
         <td>{issue.title}</td>
-        <td>
-          <Link to={`/edit/${issue.id}`}>Edit</Link>
-          {' | '}
-          <NavLink to={selectLocation}>Select</NavLink>
-        </td>
-
-
       </tr>
     );
-  });
+  }
   
  export default function IssueTable({ issues }) {
     const issueRows = issues.map(issue =>
@@ -40,7 +30,6 @@ const IssueRow = withRouter(({ issue, location: { search } }) => {
             <th>Effort</th>
             <th>Due Date</th>
             <th>Title</th>
-            <th>Action</th>
           </tr>
         </thead>
         <tbody>
